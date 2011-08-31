@@ -1,5 +1,5 @@
-Given /^I am on the static elements page$/ do
-  pending # express the regexp above with the code you wish you had
+Given /^I am on the main page$/ do
+  @browser.goto UrlHelper.main
 end
 
 When /^I open a modal$/ do
