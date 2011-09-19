@@ -8,8 +8,8 @@ module UrlHelper
       "file://#{html}"
     end
 
-    def main
-      "#{files}/main.html"
+    def modal
+      "#{files}/modal.html"
     end
   end
 end
