@@ -1,5 +1,6 @@
 class ModalPage
   include PageObject
+  include IEModal
 
   page_url UrlHelper.modal
   button(:launch_modal, :id => 'launch_modal_button')
@@ -7,6 +8,7 @@ end
 
 class ModalDialog
   include PageObject
+  include IEModal
 
   button(:close_window, :id => 'close_window')
   button(:close_window_with_delay, :id => 'delayed_close')
@@ -15,6 +17,7 @@ end
 
 class AnotherModalDialog
   include PageObject
+  include IEModal
 
   button(:close_window, :id => 'close_window2')
   button(:close_window_with_delay, :id => 'delayed_close2')
