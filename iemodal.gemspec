@@ -4,7 +4,7 @@ require "iemodal/version"
 
 Gem::Specification.new do |s|
   s.name        = "iemodal"
-  s.version     = Iemodal::VERSION
+  s.version     = IEModal::VERSION
   s.authors     = ["Jeffrey S. Morgan"]
   s.email       = ["jeff.morgan@leandog.com"]
   s.homepage    = ""
@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'page-object'
-  s.add_dependency 'rautomation'
 
   
   s.add_development_dependency 'rspec', '>= 2.6.0'
