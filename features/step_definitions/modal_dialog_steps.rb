@@ -22,35 +22,46 @@ end
 
 
 Given /^I am on the modal page$/ do
-  visit_page ModalPage
+  	visit_page ModalPage
 end
 
 When /^I open a modal dialog$/ do
-  on_page ModalPage do |page|
-    page.modal_dialog do
-      page.launch_modal
-    end
-  end
+	on_page ModalPage do |page|
+    	page.modal_dialog do
+      		page.launch_modal
+    	end
+  	end
 end
 
 Then /^I should be able to close the modal$/ do
-  on_page ModalDialog do |page|
-    page.attach_to_window(:title => 'Modal 1') do
-      page.close_window
-    end
-  end
+	on_page ModalDialog do |page|
+		page.attach_to_window(:title => 'Modal 1') do
+			page.close_window
+		end
+  	end
 end
 
 When /^I open another modal dialog from that one$/ do
-  on_page ModalDialog do |page|
-    page.attach_to_window(:title => 'Modal 1') do
-      page.modal_dialog do
-        dialog.launch_another_modal
-      end
-    end
-  end
+  	on_page ModalDialog do |page|
+  		page.attach_to_window(:title => 'Modal 1') do
+	  		page.modal_dialog do
+    			page.launch_another_modal
+    		end
+		end
+  	end
 end
 
 Then /^I should be able to close both modals$/ do
-  pending
+  	on_page AnotherModalDialog do |page|
+  		page.attach_to_window(:title => 'Modal 2') do
+	  		page.close_window 			
+  		end
+  	end
+  
+	on_page ModalDialog do |page|
+		sleep 3
+		page.attach_to_window(:title => 'Modal 2') do
+			page.close_window
+		end
+  	end
 end

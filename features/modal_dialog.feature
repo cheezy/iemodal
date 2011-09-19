@@ -11,5 +11,5 @@ Feature: handing modal dialogs
   Scenario: Nested modal dialogs
     When I open a modal dialog
     And I open another modal dialog from that one
-    #Then I should be able to close both modals
+    Then I should be able to close both modals
 
