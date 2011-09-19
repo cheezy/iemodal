@@ -1,5 +1,7 @@
+require 'rautomation'
 require "iemodal/version"
+require 'iemodal/modal_dialog'
 
-module Iemodal
+module IEModal
   # Your code goes here...
 end
