@@ -20,7 +20,7 @@ module IEModal
   			handles.size == original_handles.size + 1
 		end
 		modal = (handles - original_handles).first
-		#browser.wd.switch_to.window modal
+		browser.wd.switch_to.window modal
 	end
 	
 	def iemodal_selenium_modal_dialog(&block)
@@ -32,7 +32,7 @@ module IEModal
   			handles.size == original_handles.size + 1
 		end
 		modal = (handles - original_handles).first
-		#browser.switch_to.window modal
+		browser.switch_to.window modal
 	end
 	
 	def is_ie_watir_webdriver
