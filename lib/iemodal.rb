@@ -11,7 +11,7 @@ module IEModal
 		define_method("modal_dialog") do |&block|
 			return iemodal_watir_modal_dialog(&block) if is_ie_watir_webdriver
 			return iemodal_selenium_modal_dialog(&block) if is_ie_selenium_webdriver
-			return super *args			
+			return super &block			
 		end
 	end		
 		
