@@ -1,10 +1,12 @@
-require "iemodal/version"
+require 'iemodal/version'
+require 'page-object'
 require 'pp'
 
 module IEModal
 
 	def self.included(cls)
-		alias_method "page_object_modal_dialog", "modal_dialog"
+		fail("This module only works with PageObject") unless cls.instance_methods.include? :modal_dialog
+		alias_method :page_object_modal_dialog, cls.instance_method(:modal_dialog)
 		define_method("modal_dialog") do |*args|
 			return iemodal_watir_modal_dialog(*args) if is_ie_watir_webdriver
 			return iemodal_selenium_modal_dialog(*args) if is_ie_selenium_webdriver
