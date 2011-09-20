@@ -38,27 +38,21 @@ end
 
 Then /^I should be able to close the modal$/ do
 	on_page ModalDialog do |page|
-		page.attach_to_window(:title => 'Modal 1') do
-			page.close_window
-		end
+		page.close_window
   	end
 end
 
 When /^I open another modal dialog from that one$/ do
   	on_page ModalDialog do |page|
-  		page.attach_to_window(:title => 'Modal 1') do
-	  		page.modal_dialog do
-    			page.launch_another_modal
-    		end
+  		page.modal_dialog do
+			page.launch_another_modal
 		end
   	end
 end
 
 Then /^I should be able to close both modals$/ do
   	on_page AnotherModalDialog do |page|
-  		page.attach_to_window(:title => 'Modal 2') do
-	  		page.close_window 			
-  		end
+  		page.close_window 			
   	end
   
 	on_page ModalDialog do |page|
