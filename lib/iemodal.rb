@@ -8,11 +8,9 @@ module IEModal
 
 	def self.included(cls)
 		fail("This module only works with PageObject") unless cls.instance_methods.include? :modal_dialog
-		define_method("modal_dialog") do |*args|
-			return iemodal_watir_modal_dialog(*args) if is_ie_watir_webdriver
-			puts "didn't call ie_watir"
-			return iemodal_selenium_modal_dialog(*args) if is_ie_selenium_webdriver
-			puts "didn't call ie selenium"
+		define_method("modal_dialog") do |&block|
+			return iemodal_watir_modal_dialog(&block) if is_ie_watir_webdriver
+			return iemodal_selenium_modal_dialog(&block) if is_ie_selenium_webdriver
 			return super *args			
 		end
 	end		
@@ -37,7 +35,6 @@ module IEModal
   			handles.size == original_handles.size + 1
 		end
 		modal = (handles - original_handles).first
-		pp :handles => handles, :original_handles => original_handles, :modal => modal
 		driver.switch_to.window modal
 	end
 	
