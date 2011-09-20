@@ -1,16 +1,19 @@
 require 'iemodal/version'
 require 'page-object'
+require 'watir-webdriver'
+require 'selenium-webdriver'
 require 'pp'
 
 module IEModal
 
 	def self.included(cls)
 		fail("This module only works with PageObject") unless cls.instance_methods.include? :modal_dialog
-		alias_method :page_object_modal_dialog, cls.instance_method(:modal_dialog)
 		define_method("modal_dialog") do |*args|
 			return iemodal_watir_modal_dialog(*args) if is_ie_watir_webdriver
+			puts "didn't call ie_watir"
 			return iemodal_selenium_modal_dialog(*args) if is_ie_selenium_webdriver
-			return page_object_modal_dialog(*args) 			
+			puts "didn't call ie selenium"
+			return super *args			
 		end
 	end		
 		
@@ -19,7 +22,7 @@ module IEModal
 	end
 	
 	def iemodal_selenium_modal_dialog(&block)
-		handle_modal_dialog(driver, &block)
+		handle_modal_dialog(browser, &block)
 	end
 	
 	private
@@ -28,7 +31,8 @@ module IEModal
 		original_handles = driver.window_handles
 		yield if block_given?
 		handles = nil
-		driver.wait.until do
+		wait = Selenium::WebDriver::Wait.new
+		wait.until do
   			handles = driver.window_handles
   			handles.size == original_handles.size + 1
 		end
@@ -38,11 +42,12 @@ module IEModal
 	end
 	
 	def is_ie_watir_webdriver
-		return (@browser.is_a Watir::Browser and @browser.wd.bridge.is_a Selenium::Webdriver::IE::Bridge)
+		return (@browser.is_a? Watir::Browser and @browser.wd.bridge.is_a? Selenium::WebDriver::IE::Bridge)
 	end
 	
 	def is_ie_selenium_webdriver
-		return (@browser.is_a Selenium::WebDriver::Driver and @browser.bridge.is_a Selenium::Webdriver::IE::Bridge)
+		bridge = @browser.instance_variable_get "@bridge"
+		return (@browser.is_a? Selenium::WebDriver::Driver and bridge.is_a? Selenium::WebDriver::IE::Bridge)
 	end
 
 end

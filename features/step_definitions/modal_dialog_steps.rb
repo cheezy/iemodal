@@ -62,7 +62,6 @@ Then /^I should be able to close both modals$/ do
   	end
   
 	on_page ModalDialog do |page|
-		sleep 3
 		page.attach_to_window(:title => 'Modal 1') do
 			page.close_window
 		end
