@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '../../', 'lib'))
 
+require 'iemodal'
 require 'rspec/expectations'
 require 'watir-webdriver'
 require 'selenium-webdriver'
