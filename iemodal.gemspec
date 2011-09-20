@@ -5,8 +5,8 @@ require "iemodal/version"
 Gem::Specification.new do |s|
   s.name        = "iemodal"
   s.version     = IEModal::VERSION
-  s.authors     = ["Jeffrey S. Morgan"]
-  s.email       = ["jeff.morgan@leandog.com"]
+  s.authors     = ["Jeffrey S. Morgan", "Paul Clewell"]
+  s.email       = ["jeff.morgan@leandog.com", "paul.clewell@mrisoftware.com"]
   s.homepage    = ""
   s.summary     = %q{Makes it possible to interact with modal dialogs in Internet Explorer}
   s.description = %q{Makes it possible to interact with modal dialogs in Internet Explorer}
