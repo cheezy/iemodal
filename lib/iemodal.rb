@@ -15,7 +15,7 @@ module IEModal
 		end
 	end		
 		
-	def iemodal_watir_modial_dialog(&block)
+	def iemodal_watir_modal_dialog(&block)
 		handle_modal_dialog(browser.wd, &block)
 	end
 	
@@ -28,23 +28,39 @@ module IEModal
 	def handle_modal_dialog(driver, &block)
 		original_handles = driver.window_handles
 		yield if block_given?
+		handles = wait_for_new_handle(original_handles, driver)
+		modal = (handles - original_handles).first
+		driver.switch_to.window modal
+	end
+
+	def wait_for_new_handle(original_handles, driver)
 		handles = nil
 		wait = Selenium::WebDriver::Wait.new
 		wait.until do
   			handles = driver.window_handles
   			handles.size == original_handles.size + 1
 		end
-		modal = (handles - original_handles).first
-		driver.switch_to.window modal
+		handles		
 	end
 	
 	def is_ie_watir_webdriver
-		return (@browser.is_a? Watir::Browser and @browser.wd.bridge.is_a? Selenium::WebDriver::IE::Bridge)
+		return (is_watir and is_ie(@browser.wd.instance_variable_get "@bridge"))
 	end
 	
 	def is_ie_selenium_webdriver
-		bridge = @browser.instance_variable_get "@bridge"
-		return (@browser.is_a? Selenium::WebDriver::Driver and bridge.is_a? Selenium::WebDriver::IE::Bridge)
+		return (is_selenium and is_ie(@browser.instance_variable_get "@bridge"))
+	end
+	
+	def is_watir
+		return @browser.is_a? Watir::Browser
+	end
+	
+	def is_selenium
+		@browser.is_a? Selenium::WebDriver::Driver
+	end
+	
+	def is_ie(bridge)
+		bridge.is_a? Selenium::WebDriver::IE::Bridge
 	end
 
 end
