@@ -35,7 +35,7 @@ module IEModal
 
 	def wait_for_new_handle(original_handles, driver)
 		handles = nil
-		wait = Selenium::WebDriver::Wait.new
+		wait = Selenium::WebDriver::Wait.new(:timeout => 10)
 		wait.until do
   			handles = driver.window_handles
   			handles.size == original_handles.size + 1
