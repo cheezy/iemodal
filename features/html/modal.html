@@ -1,9 +1,7 @@
 <html>
   <head>
-    <title>modal dialog test page</title>
-  </head>
-  <body>
-    
+    <title>Main Modal</title>
+
     <script type="text/javascript">
       function modal() {
         var retValue = window.showModalDialog(
@@ -11,7 +9,10 @@
           "status:no;resizable:Yes;help:no;maximize:no;minimize:no;scrollbars:no;");
       }
     </script>
+  </head>
+  <body>
     
+
     <input id=launch_modal_button type=button onclick='return modal();' value="Launch a modal" />
   </body>
 </html>
